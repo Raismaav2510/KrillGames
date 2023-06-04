@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="barra">#220914</color>
+    <color name="yellow_200">#E1BF9B</color>
+    <color name="yellow_500">#f5a958</color>
+    <color name="yellow_700">#8F591F</color>
+    <color name="pink_200">#ED9FAA</color>
+    <color name="pink_700">#ec6779</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background_200">#AE5E81</color>
+    <color name="background_500">#5a2b41</color>
+    <color name="background_700">#532339</color>
+    <color name="brown">#FC2C1907</color>
+</resources>

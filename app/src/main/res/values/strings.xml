@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">KRILL GAMES</string>
+
+    <string-array name="sexo">
+        <item>Select your gender</item>
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+
+    <string-array name="disponibilidad">
+        <item>Select availability</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
