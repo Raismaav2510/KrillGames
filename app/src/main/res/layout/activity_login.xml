@@ -118,7 +118,6 @@
         android:background="@drawable/btn_background"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/lato_black"
-        android:onClick="Ingresar"
         android:text="LOG IN"
         android:textColor="@color/brown"
         android:theme="@style/Theme.Botones"
