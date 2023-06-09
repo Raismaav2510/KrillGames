@@ -18,7 +18,6 @@
         android:background="@drawable/btn_background"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/lato_black"
-        android:onClick="registrarUsuario"
         android:text="CHECK IN"
         android:textColor="@color/brown"
         android:theme="@style/Theme.Botones"

@@ -6,10 +6,13 @@ import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -20,9 +23,12 @@ public class LoginActivity extends AppCompatActivity {
     //Declaración de elementos
     public Switch swHuella;
     public Button btnIngresar;
+    EditText edtUsuario;
+    EditText edtClave;
 
     //Variables Globales
     public Boolean CheckHuella;
+    ControladorBD admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         //Asociación de elementos
         swHuella = (Switch)findViewById(R.id.swHuella);
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
+        edtUsuario = (EditText) findViewById(R.id.edtUsuario);
+        edtClave = (EditText) findViewById(R.id.edtContrasena);
 
         CheckHuella = false;
+
+        admin = new ControladorBD(this, "KrillGames.db", null, 1);
 
         //Variables para el uso de huella
         androidx.biometric.BiometricManager biometricManager = androidx.biometric.BiometricManager.from(this);
@@ -76,16 +86,44 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(CheckHuella){
                     biometricPrompt.authenticate(promptInfo);
+                }else{
+                    Ingresar();
                 }
-
             }
         });
     }
 
     //Metodo que cambia a activity Menu
     public void Ingresar() {
-        Intent ingresar = new Intent(this, MenuActivity.class);
-        startActivity(ingresar);
+
+        SQLiteDatabase bd = admin.getReadableDatabase();
+
+        if (edtClave.getText().toString().isEmpty() || edtUsuario.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show();
+        }else{
+            String usuario = edtUsuario.getText().toString().trim();
+            String clave = edtClave.getText().toString().trim();
+
+            Cursor fila = bd.rawQuery("select Password from Usuario where Username LIKE ?", new String[] { "%" + usuario + "%" });
+
+            if(fila.moveToFirst()){
+
+                if(clave.equals(fila.getString(0))){
+                    Intent ingresar = new Intent(this, MenuActivity.class);
+                    startActivity(ingresar);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Datos invalidos", Toast.LENGTH_SHORT).show();
+                }
+
+                bd.close();
+            }else{
+                Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show();
+                bd.close();
+            }
+
+        }
+
+
     }
 
     /* MÉTODO PARA IR AL FORMULARIO DE REGISTRO */
