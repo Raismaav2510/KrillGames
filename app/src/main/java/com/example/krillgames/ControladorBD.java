@@ -13,7 +13,7 @@ public class ControladorBD extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase nombreBD) {
-        String sqlUsuarios = "create table Usuario (IDU INTEGER PRIMARY KEY AUTOINCREMENT, Nombre text, Contrasena text, Correo text, Huella blob)";
+        String sqlUsuarios = "create table Usuario (IDU INTEGER PRIMARY KEY AUTOINCREMENT, Nombre text, Apellido text, Password text, Username text, Edad int, Gender text)";
         String sqlVideojuego = "create table Videojuego (IDV INTEGER PRIMARY KEY AUTOINCREMENT, Nombre text, Precio int, Disponibilidad boolean, CodigoQR blob)";
         String sqlCompras = "create table Compras (IDC INTEGER PRIMARY KEY AUTOINCREMENT, idu INTEGER REFERENCES Usuario(IDU) ON UPDATE CASCADE ON DELETE CASCADE, idv INTEGER REFERENCES Videojuego(IDV) ON UPDATE CASCADE ON DELETE CASCADE)";
         String sqlSucursal = "create table Sucursal (IDS INTEGER PRIMARY KEY AUTOINCREMENT, Nombre text, Direccion text, Ubicacion text, Telefono int)";
