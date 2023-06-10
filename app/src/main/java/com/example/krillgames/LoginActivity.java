@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import java.util.concurrent.Executor;
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,9 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
         edtUsuario = (EditText) findViewById(R.id.edtUsuario);
         edtClave = (EditText) findViewById(R.id.edtContrasena);
-
         CheckHuella = false;
-
         admin = new ControladorBD(this, "KrillGames.db", null, 1);
 
         //Variables para el uso de huella
@@ -58,16 +54,12 @@ public class LoginActivity extends AppCompatActivity {
                 super.onAuthenticationSucceeded(result);
                 Ingresar();
             }
-
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
             }
         });
-
-        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("Verifica tu identidad")
-                .setDescription("Coloca el dedo sobre el lector de huella").setNegativeButtonText("Cancelar").build();
-
+        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("Verifica tu identidad").setDescription("Coloca el dedo sobre el lector de huella").setNegativeButtonText("Cancelar").build();
 
         //Metodos atados a los botones directamente
         swHuella.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -80,13 +72,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(CheckHuella){
+                if (CheckHuella) {
                     biometricPrompt.authenticate(promptInfo);
-                }else{
+                } else {
                     Ingresar();
                 }
             }
@@ -95,35 +86,26 @@ public class LoginActivity extends AppCompatActivity {
 
     //Metodo que cambia a activity Menu
     public void Ingresar() {
-
         SQLiteDatabase bd = admin.getReadableDatabase();
-
-        if (edtClave.getText().toString().isEmpty() || edtUsuario.getText().toString().isEmpty()){
+        if (edtClave.getText().toString().isEmpty() || edtUsuario.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             String usuario = edtUsuario.getText().toString().trim();
             String clave = edtClave.getText().toString().trim();
-
             Cursor fila = bd.rawQuery("select Password from Usuario where Username LIKE ?", new String[] { "%" + usuario + "%" });
-
-            if(fila.moveToFirst()){
-
-                if(clave.equals(fila.getString(0))){
+            if (fila.moveToFirst()) {
+                if (clave.equals(fila.getString(0))) {
                     Intent ingresar = new Intent(this, MenuActivity.class);
                     startActivity(ingresar);
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(),"Datos invalidos", Toast.LENGTH_SHORT).show();
                 }
-
                 bd.close();
-            }else{
+            } else {
                 Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show();
                 bd.close();
             }
-
         }
-
-
     }
 
     /* MÉTODO PARA IR AL FORMULARIO DE REGISTRO */

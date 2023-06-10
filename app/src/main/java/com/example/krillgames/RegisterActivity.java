@@ -1,7 +1,6 @@
 package com.example.krillgames;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.SQLException;
@@ -9,13 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.example.krillgames.ControladorBD;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -36,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //asociación de componentes
+        //Asociación de componentes
         edtNombre = (EditText) findViewById(R.id.edtNombre);
         edtApellido = (EditText) findViewById(R.id.edtApellido);
         edtEdad = (EditText) findViewById(R.id.edtEdad);
@@ -44,7 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
         edtClave = (EditText) findViewById(R.id.edtContrasenaRegistro);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
         spsexo = (Spinner) findViewById(R.id.spSexo);
-
         admin = new ControladorBD(this, "KrillGames.db", null, 1);
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -56,49 +51,35 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void registrarUsuario() {
-
-        if (edtNombre.getText().toString().isEmpty() || edtApellido.getText().toString().isEmpty() ||
-        edtClave.getText().toString().isEmpty() || edtUsuario.getText().toString().isEmpty() ||
-                spsexo.getSelectedItem().toString().equals("Select your gender")){
+        if (edtNombre.getText().toString().isEmpty() || edtApellido.getText().toString().isEmpty() || edtClave.getText().toString().isEmpty() || edtUsuario.getText().toString().isEmpty() || spsexo.getSelectedItem().toString().equals("Select your gender")) {
             Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show();
-        }else{
-
+        } else {
             SQLiteDatabase bd = admin.getWritableDatabase();
-
             String nombre = edtNombre.getText().toString();
             String apellido = edtApellido.getText().toString();
             String clave = edtClave.getText().toString();
             String usuario = edtUsuario.getText().toString();
             int edad = Integer.valueOf(edtEdad.getText().toString());
             String genero = spsexo.getSelectedItem().toString();
-
             ContentValues registro = new ContentValues();
-
             registro.put("Nombre", nombre);
             registro.put("Apellido", apellido);
             registro.put("Password", clave);
             registro.put("Username", usuario);
             registro.put("Edad", edad);
             registro.put("Gender", genero);
-
-            if(bd != null){
+            if(bd != null) {
                 long x = 0;
-
-                try{
+                try {
                     x = bd.insert("Usuario", null, registro);
-                }catch(SQLException e){
+                } catch(SQLException e) {
                     Log.e("Exception", "Error:"+String.valueOf(e.getMessage()));
                 }
-
                 bd.close();
             }
-
             Toast.makeText(this, "Usuario Registrado Exitosamente", Toast.LENGTH_SHORT).show();
-
             Intent registrarusuario = new Intent(this, LoginActivity.class);
             startActivity(registrarusuario);
         }
-
     }
-
 }
