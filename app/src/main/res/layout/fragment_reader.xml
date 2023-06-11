@@ -37,9 +37,9 @@
         android:textColor="@color/white"
         android:textColorHint="@color/background_700"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTituloLector" />
+        app:layout_constraintTop_toBottomOf="@+id/edtCodigo" />
 
     <EditText
         android:id="@+id/edtCompania"
@@ -74,7 +74,7 @@
         android:textColorHint="@color/background_700"
         app:layout_constraintEnd_toStartOf="@+id/btnEscanear"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCompania" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloLector" />
 
     <Button
         android:id="@+id/btnEscanear"
@@ -91,10 +91,10 @@
         android:theme="@style/Theme.Botones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edtCodigo"
-        app:layout_constraintTop_toBottomOf="@+id/edtCompania" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloLector" />
 
     <Spinner
-        android:id="@+id/spDisponibilidad"
+        android:id="@+id/spCategoria"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -104,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCodigo" />
+        app:layout_constraintTop_toBottomOf="@+id/edtCompania" />
 
     <EditText
         android:id="@+id/edtPrecio"
@@ -122,10 +122,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spDisponibilidad" />
+        app:layout_constraintTop_toBottomOf="@+id/spCategoria" />
 
     <EditText
-        android:id="@+id/edtIdJuego"
+        android:id="@+id/edtCantidad"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -133,8 +133,9 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/edt_background"
         android:fontFamily="@font/lato_regular"
-        android:hint="Enter the game ID"
+        android:hint="Write the desired quantity of the product"
         android:textColor="@color/white"
+        android:inputType="number"
         android:textColorHint="@color/background_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
