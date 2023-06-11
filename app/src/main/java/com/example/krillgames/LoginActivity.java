@@ -84,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Metodo que cambia a activity Menu
     public void Ingresar() {
         SQLiteDatabase bd = admin.getReadableDatabase();
         if (edtClave.getText().toString().isEmpty() || edtUsuario.getText().toString().isEmpty()) {
@@ -108,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    /* MÉTODO PARA IR AL FORMULARIO DE REGISTRO */
     public void Registrar(View view) {
         Intent registrar = new Intent(this, RegisterActivity.class);
         startActivity(registrar);

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -41,6 +42,11 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
         spsexo = (Spinner) findViewById(R.id.spSexo);
         admin = new ControladorBD(this, "KrillGames.db", null, 1);
+
+        String[] sexo = {"Select your gender","Female", "Male"};
+        ArrayAdapter<String> spSexo = new ArrayAdapter<String>(this, R.layout.spinner_item, sexo);
+        spSexo.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spsexo.setAdapter(spSexo);
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,4 +34,9 @@
     <style name="Theme.KRILLGAMES.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.KRILLGAMES.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Theme.KRILLGAMES.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
 </resources>

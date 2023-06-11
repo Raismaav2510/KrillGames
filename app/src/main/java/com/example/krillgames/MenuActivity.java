@@ -12,7 +12,6 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MenuActivity extends AppCompatActivity {
 
-    /* VARIABLES NECESARIAS PARA EL MENÚ LATERAL */
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuBinding binding;
 
@@ -32,7 +31,6 @@ public class MenuActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    /* MÉTODO PARA ESTABLECER EL CONTROL DE NAVEGACIÓN DEL MENÚ LATERAL */
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

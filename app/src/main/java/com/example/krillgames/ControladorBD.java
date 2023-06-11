@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 public class ControladorBD extends SQLiteOpenHelper {
+
     public ControladorBD(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super (context, name, factory, version);
     }
