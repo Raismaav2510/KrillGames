@@ -1,9 +1,19 @@
 package com.example.krillgames.Fragments;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.ContentValues;
+import android.content.pm.PackageManager;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +36,8 @@ public class ReaderFragment extends Fragment {
     ControladorBD controler;
     Button scan, register;
     String codes;
+    private final static String CHANNEL_ID = "NOTIFICACION";
+    public final static int NOTIFICACION_ID = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,7 +109,8 @@ public class ReaderFragment extends Fragment {
             price.setText("");
             quantity.setText("");
             title.requestFocus();
-            Toast.makeText(getActivity(), "Registered Videogame", Toast.LENGTH_SHORT).show();
+            crearCanalNotificacion();
+            crearNotificacion();
         } else {
             Toast.makeText(getActivity(), "Record the data first", Toast.LENGTH_SHORT).show();
         }
@@ -111,5 +124,38 @@ public class ReaderFragment extends Fragment {
         intentIntegrator.setBeepEnabled(true);
         intentIntegrator.setBarcodeImageEnabled(true);
         intentIntegrator.initiateScan();
+    }
+
+    private void crearCanalNotificacion() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Notification";
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
+
+    private void crearNotificacion() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity().getApplicationContext(), CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.krill_logo);
+        builder.setContentTitle("AMAZING!");
+        builder.setContentText("Your game has been registered in your list");
+        builder.setColor(R.drawable.gradient_background_dark);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setLights(Color.RED, 1000, 1000);
+        builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity().getApplicationContext());
+        if(ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
     }
 }

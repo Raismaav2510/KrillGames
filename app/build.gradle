@@ -61,4 +61,6 @@ dependencies {
 
     //Codigo de barras
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
 }
