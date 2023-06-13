@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void registrarUsuario() {
         if (edtNombre.getText().toString().isEmpty() || edtApellido.getText().toString().isEmpty() || edtClave.getText().toString().isEmpty() || edtUsuario.getText().toString().isEmpty() || spsexo.getSelectedItem().toString().equals("Select your gender")) {
-            Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please, fill all the fields", Toast.LENGTH_SHORT).show();
         } else {
             SQLiteDatabase bd = admin.getWritableDatabase();
             String nombre = edtNombre.getText().toString();
@@ -83,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 bd.close();
             }
-            Toast.makeText(this, "Usuario Registrado Exitosamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "User registered succesfully", Toast.LENGTH_SHORT).show();
             Intent registrarusuario = new Intent(this, LoginActivity.class);
             startActivity(registrarusuario);
         }

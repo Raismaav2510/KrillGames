@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     public void Ingresar() {
         SQLiteDatabase bd = admin.getReadableDatabase();
         if (edtClave.getText().toString().isEmpty() || edtUsuario.getText().toString().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please, fill all the fields", Toast.LENGTH_SHORT).show();
         } else {
             String usuario = edtUsuario.getText().toString().trim();
             String clave = edtClave.getText().toString().trim();
@@ -97,11 +97,11 @@ public class LoginActivity extends AppCompatActivity {
                     Intent ingresar = new Intent(this, MenuActivity.class);
                     startActivity(ingresar);
                 } else {
-                    Toast.makeText(getApplicationContext(),"Datos invalidos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Inavlid Data", Toast.LENGTH_SHORT).show();
                 }
                 bd.close();
             } else {
-                Toast.makeText(getApplicationContext(), "Datos invalidos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Invalid Data", Toast.LENGTH_SHORT).show();
                 bd.close();
             }
         }
