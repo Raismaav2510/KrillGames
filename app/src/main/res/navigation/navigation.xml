@@ -24,4 +24,11 @@
         android:label="Menu_map"
         tools:layout="@layout/fragment_map" />
 
+    <activity
+        android:id="@+id/nav_close"
+        android:name="com.example.krillgames.LoginActivity"
+        android:label="Menu_login"
+        tools:layout="@layout/activity_login" />
+
+
 </navigation>
